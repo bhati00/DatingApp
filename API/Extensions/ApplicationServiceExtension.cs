@@ -14,6 +14,8 @@ namespace API.Extensions
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddScoped<ITokenService, TokenServices>();
+            services.AddScoped<IUserRepository,UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<DataContext>(opt =>
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));

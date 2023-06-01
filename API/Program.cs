@@ -1,5 +1,7 @@
+using API.Data;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,5 +19,20 @@ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod()
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var Context = services.GetRequiredService<DataContext>();
+    await Context.Database.MigrateAsync();
+    await Seed.SeedUsers(Context);
+
+}
+catch(Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex,"An Error Occured During Migration");
+}
+
 
 app.Run();
