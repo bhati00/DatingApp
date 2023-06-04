@@ -17,11 +17,13 @@ const routes: Routes = [
     canActivate: [authGuardFn],
     children: [
       { path: 'members/:id', component: MemberDetailComponent },
+      { path: 'members', component: MemberListComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'not-found', component: NotFoundComponent },
       { path: 'server-error', component: ServerErrorComponent },
       { path: 'messages', component: MessagesComponent, },
       { path: '**', component: NotFoundComponent, pathMatch: 'full' }
+      
     ]
   }
 ];
