@@ -21,7 +21,7 @@ namespace API.Controllers
             _userRepository = userRepository;  
             _mapper = mapper;         
         }
-        
+          [AllowAnonymous]
         [HttpGet]
        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {

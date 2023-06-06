@@ -17,13 +17,13 @@ export class MemberListComponent {
  }
  ngOnInit(): void{
    this.loadMembers();
-   console.log("hello");
+   
  }
  loadMembers(){
-  this.memberService.getMembers().subscribe(
-    {
-      next: members => this.members = members
-    }
-  )
+  this.memberService.getMembers().subscribe({
+    next: members => {
+      this.members = members;
+      }
+  });
  }
 }
